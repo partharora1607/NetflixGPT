@@ -2,14 +2,18 @@ import Header from "./Header";
 import bgImage from "../images/bgImage.jpg";
 import { useRef, useState } from "react";
 import { checkValidData } from "../utils/validate";
+import { auth } from "../utils/firebase";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
-
+  const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState({
     emailError: null,
     passwordError: null,
     nameError: null,
+    authError: null,
   });
 
   const email = useRef(null);
@@ -23,7 +27,46 @@ const Login = () => {
       emailError: msg[0],
       passwordError: msg[1],
       nameError: msg[2],
+      authError: null,
     });
+
+    if (errorMessage.emailError != null || errorMessage.password != null || errorMessage.name != null) {
+      return;
+    }
+
+    if (!isSignInForm) {
+      // sign up
+      createUserWithEmailAndPassword(auth, email.current.value, password.current.value)
+        .then((userCredential) => {
+          const user = userCredential.user;
+          updateProfile(user, {
+            displayName: name.current.value,
+          });
+          console.log(user);
+          setIsSignInForm(true);
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          console.log(errorCode + " - " + errorMessage);
+        });
+    } else {
+      // sign in
+      signInWithEmailAndPassword(auth, email.current.value, password.current.value)
+        .then((userCredential) => {
+          const user = userCredential.user;
+          console.log(user);
+          navigate("/Browse");
+        })
+        .catch((error) => {
+          // const errorCode = error.code;
+          // const errorMessage = error.message;
+          setErrorMessage((prevErrorMessage) => ({
+            ...prevErrorMessage,
+            authError: "Invalid email or password. Please try again.",
+          }));
+        });
+    }
   };
 
   const signInHandler = () => {
@@ -33,6 +76,7 @@ const Login = () => {
       emailError: null,
       passwordError: null,
       nameError: null,
+      authError: null,
     });
     // Reset input fields
     if (email?.current?.value) email.current.value = "";
@@ -43,8 +87,7 @@ const Login = () => {
   return (
     <div>
       <Header />
-      <div className="absolute">
-        <img src={bgImage} alt="Netflix background" className="h-[80rem] w-[159rem]" />
+      <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${bgImage})` }}>
         <div className="absolute inset-0 bg-black opacity-60"></div>
       </div>
       <form
@@ -83,6 +126,7 @@ const Login = () => {
         <button className="p-6 mt-3 bg-red-600 w-full rounded-lg text-xl" onClick={handleClick}>
           {isSignInForm ? "Sign In" : "Sign Up"}
         </button>
+        {errorMessage.authError && <p className="my-3 font-medium">{errorMessage.authError}</p>}
         {isSignInForm ? (
           <p className="text-xl my-6">
             New to Netflix? &nbsp;

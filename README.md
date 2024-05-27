@@ -3,8 +3,15 @@
 - create React App
 - configured Tailwind Css
 - Header
+- Routuing
 - Login Form
 - Sign Up form
+- Form Validation
+- useRef hook
+- Firebase setup
+- Deploying our app to production (firebase)
+- create sign up & sign in user account in firebase
+- configure redux store
 
 # Features :
 
@@ -23,3 +30,10 @@
 - NetflixGPT
   - seatch bar
   - movie suggestations
+
+# Delopy on firebase Hosting
+
+commands :
+-firebase login
+-firebase init
+-firebase deploy
