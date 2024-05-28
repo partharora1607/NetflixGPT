@@ -14,15 +14,10 @@ const Header = () => {
   const user = useSelector((store) => store.user);
 
   const handleSignOut = () => {
-    signOut(auth)
-      .then(() => {
-        // sign out successfully
-        navigate("/");
-      })
-      .catch((error) => {
-        console.log(error);
-        // error occured while signout
-      });
+    signOut(auth).then(() => {
+      // sign out successfully
+      navigate("/");
+    });
   };
 
   useEffect(() => {

@@ -36,26 +36,18 @@ const Login = () => {
 
     if (!isSignInForm) {
       // sign up
-      createUserWithEmailAndPassword(auth, email.current.value, password.current.value)
-        .then((userCredential) => {
-          const user = userCredential.user;
-          updateProfile(user, {
-            displayName: name.current.value,
-          });
-          console.log(user);
-          setIsSignInForm(true);
-        })
-        .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          console.log(errorCode + " - " + errorMessage);
+      createUserWithEmailAndPassword(auth, email.current.value, password.current.value).then((userCredential) => {
+        const user = userCredential.user;
+        updateProfile(user, {
+          displayName: name.current.value,
         });
+        setIsSignInForm(true);
+      });
     } else {
       // sign in
       signInWithEmailAndPassword(auth, email.current.value, password.current.value)
         .then((userCredential) => {
           const user = userCredential.user;
-          console.log(user);
           navigate("/Browse");
         })
         .catch((error) => {
