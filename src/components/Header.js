@@ -1,11 +1,14 @@
-import { signOut } from "firebase/auth";
+import { onAuthStateChanged, signOut } from "firebase/auth";
 import Netflix_Logo_PMS from "../images/Netflix_Logo_PMS.jpg";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { addUser, removeUser } from "../utils/slices/userSlice";
+import { useEffect } from "react";
 
 const Header = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const user = useSelector((store) => store.user);
 
@@ -20,6 +23,21 @@ const Header = () => {
         // error occured while signout
       });
   };
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // sign in
+        const { uid, email, displayName } = user;
+        dispatch(addUser({ uid: uid, email: email, displayName: displayName }));
+        navigate("/Browse");
+      } else {
+        // sign out
+        dispatch(removeUser());
+        navigate("/");
+      }
+    });
+  }, []);
 
   return (
     <div className="absolute z-10 w-screen px-8 py-2   flex justify-between">
