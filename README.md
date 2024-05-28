@@ -16,6 +16,15 @@
 - add hardcoded data into constatnts file
 - register for tmbd website , create a new app and get access token
 - get data from tmdn now playing movies list api's
+- custom hooks for now playing movies
+- updated stores with movie data
+- create a movie slice
+- update store for movie data
+- planning for main container and secondary container
+- fetch data for trailer video
+- update the store with trailer video data
+- embedded the youtube video
+- make autoplay and add tailwind css
 
 # Features :
 

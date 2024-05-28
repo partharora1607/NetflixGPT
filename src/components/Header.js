@@ -37,13 +37,13 @@ const Header = () => {
   }, []);
 
   return (
-    <div className="absolute z-10 w-screen px-8 py-2   flex justify-between">
+    <div className="absolute z-10 w-screen px-8 mt-5 flex justify-between">
       <img className="w-1/12 mx-3.5" src={Netflix_Logo_PMS} alt="logo" />
       {user && (
         <div className="flex">
-          <img src={ICON_URL} alt="icon" className="w-9 h-9 rounded-sm my-3 mx-2" />
-          <button className="font-semibold" onClick={handleSignOut}>
-            Sign out{" "}
+          <img src={ICON_URL} alt="icon" className="w-9 h-9 rounded-sm my-7 mx-2" />
+          <button className="font-semibold text-red-600 underline" onClick={handleSignOut}>
+            (Sign out)
           </button>
         </div>
       )}
