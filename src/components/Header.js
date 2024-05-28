@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser, removeUser } from "../utils/slices/userSlice";
 import { useEffect } from "react";
+import { ICON_URL } from "../utils/constants";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -25,7 +26,7 @@ const Header = () => {
   };
 
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         // sign in
         const { uid, email, displayName } = user;
@@ -37,6 +38,7 @@ const Header = () => {
         navigate("/");
       }
     });
+    return () => unsubscribe();
   }, []);
 
   return (
@@ -44,11 +46,7 @@ const Header = () => {
       <img className="w-1/12 mx-3.5" src={Netflix_Logo_PMS} alt="logo" />
       {user && (
         <div className="flex">
-          <img
-            src="https://occ-0-2590-2164.1.nflxso.net/dnm/api/v6/vN7bi_My87NPKvsBoib006Llxzg/AAAABW7Wui3ZqHqBvl3R__TmY0sDZF-xBxJJinhVWRwu7OmYkF2bdwH4nqfnyT3YQ-JshQvap33bDbRLACSoadpKwbIQIBktdtHjxw.png?r=201"
-            alt="icon"
-            className="w-9 h-9 rounded-sm my-3 mx-2"
-          />
+          <img src={ICON_URL} alt="icon" className="w-9 h-9 rounded-sm my-3 mx-2" />
           <button className="font-semibold" onClick={handleSignOut}>
             Sign out{" "}
           </button>
