@@ -45,6 +45,6 @@ commands :
 # TMDB
 
 - API KEY
-  -fc8c2246257d5a973e25730fd5ae03da
+  -...
 - API Read Access Token
-  -eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmYzhjMjI0NjI1N2Q1YTk3M2UyNTczMGZkNWFlMDNkYSIsInN1YiI6IjY2NTU3YWMxZjk0NTJlYzI5ODFjYmFiYSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.H90oem1FlKrerzqsb4FSCQmlGzpESaq17FZ-ShEDYIk
+  -...
