@@ -25,6 +25,13 @@
 - update the store with trailer video data
 - embedded the youtube video
 - make autoplay and add tailwind css
+- build secondary component
+- building movie list and movie card
+- getting dynamic data from TMDB movies list (use VPN as tmdb is ban in india)
+  - popular
+  - top rated
+  - now playing
+  - upcomming
 
 # Features :
 
