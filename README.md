@@ -32,6 +32,11 @@
   - top rated
   - now playing
   - upcomming
+- Gpt Search Bar
+- Multilang functionality
+- Integrate OpenAI api / keys
+
+# gpt search feature :
 
 # Features :
 

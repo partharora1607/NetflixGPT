@@ -1,7 +1,6 @@
 import MovieCard from "./MovieCard";
 
 const MovieList = ({ title, movies }) => {
-  // console.log("movies : ", movies);
   if (!movies) return;
   return (
     <div className="my-3 mx-10">
